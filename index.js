@@ -385,7 +385,31 @@
     }
     return null;
   }
+// ===== SIGNATURE IMAGE AS TRIPOD HOTSPOT =====
+function addSignatureHotspot(sceneObj) {
 
+  var el = document.createElement('img');
+  el.src = 'img/signature.png';  
+  el.style.width = '120px';
+  el.style.height = '120px';
+  el.style.borderRadius = '50%';
+  el.style.transform = 'translate(-50%, -50%)';
+  el.style.pointerEvents = 'none';
+
+  // tripod position (nadir - spodní část panoramatu)
+  var yaw = 0;
+  var pitch = -Math.PI / 2 + 0.02;
+
+  sceneObj.scene.hotspotContainer().createHotspot(el, {
+    yaw: yaw,
+    pitch: pitch
+  });
+}
+
+// přidáme podpis do všech scén
+scenes.forEach(function(s) {
+  addSignatureHotspot(s);
+});
   // Display the initial scene.
   switchScene(scenes[0]);
 
